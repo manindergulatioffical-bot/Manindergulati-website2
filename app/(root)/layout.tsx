@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ImageKitProvider publicKey={env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}>
+        <ImageKitProvider urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}>
           {children}
         </ImageKitProvider>
         <Footer />

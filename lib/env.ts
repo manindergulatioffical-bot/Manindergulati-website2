@@ -10,5 +10,5 @@ const envSchema = z.object({
 });
 
 export function getEnv() {
-  return envSchema.parse(process.env); // ✅ only runs at runtime
+  return envSchema.parse(process.env); // ✅ runtime-safe
 }
