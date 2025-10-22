@@ -9,4 +9,6 @@ const envSchema = z.object({
   JWT_SECRET: z.string(),
 });
 
-export const env = envSchema.parse(process.env);
+export function getEnv() {
+  return envSchema.parse(process.env); // ✅ runs at runtime
+}
