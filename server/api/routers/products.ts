@@ -4,9 +4,9 @@ import { and, count, eq, desc, ilike, or } from "drizzle-orm";
 import { products } from "@/server/db";
 import { TRPCError } from "@trpc/server";
 import { decryptImageUrl } from "@/lib/utils";
-import { deleteImages } from "./imagekit-helpers";
-import { editProductSchema, insertProductSchema } from "@/types/zod-schema";
 
+import { editProductSchema, insertProductSchema } from "@/types/zod-schema";
+import { deleteImages, generateImageKitAuthParams } from "./imagekit-helpers";
 export const productsRouter = createTRPCRouter({
   getProducts: publicProcedure
     .input(

@@ -1,37 +1,33 @@
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { type NextRequest } from "next/server";
+// server/api/trpc.ts
+import { initTRPC } from "@trpc/server";
+import superjson from "superjson";
+import { getEnv } from "@/lib/env"; // ✅ use getEnv instead of env
 
-import { getEnv } from "@/lib/env"; // ✅ runtime-safe
-import { appRouter } from "@/server/api/root";
-import { createTRPCContext } from "@/server/api/trpc";
+const t = initTRPC.context<{
+  // your context here
+}>().create({
+  transformer: superjson,
+  errorFormatter({ shape }) {
+    return shape;
+  },
+});
 
-/**
- * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
- * handling a HTTP request (e.g. when you make requests from Client Components).
- */
-const createContext = async (req: NextRequest) => {
-  return createTRPCContext({
-    headers: req.headers,
-  });
+// Example: if you need env in some middleware or context
+export const createTRPCContext = () => {
+  const env = getEnv(); // ✅ runtime-safe access to environment variables
+
+  return {
+    env,
+    // other context properties
+  };
 };
 
-const handler = (req: NextRequest) => {
-  const env = getEnv(); // ✅ parse env at runtime
+export const createTRPCRouter = t.router;
+export const publicProcedure = t.procedure;
+// Example placeholder middleware; replace with your actual auth middleware
+const authMiddleware = t.middleware(async ({ ctx, next }) => {
+  // Add authentication logic here
+  return next();
+});
 
-  return fetchRequestHandler({
-    endpoint: "/api/trpc",
-    req,
-    router: appRouter,
-    createContext: () => createContext(req),
-    onError:
-      env.NODE_ENV === "development"
-        ? ({ path, error }) => {
-            console.error(
-              `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
-            );
-          }
-        : undefined,
-  });
-};
-
-export { handler as GET, handler as POST };
+export const protectedProcedure = t.procedure.use(authMiddleware);
