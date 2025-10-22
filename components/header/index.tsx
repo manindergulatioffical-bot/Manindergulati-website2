@@ -1,4 +1,3 @@
-// app/components/Header.tsx
 "use client";
 
 import Script from "next/script";
@@ -26,24 +25,22 @@ export function Header() {
         `}
       </Script>
 
-      {/* Header */}
+      {/* Your existing header */}
       <header className="border-b bg-white relative">
         <div className="container mx-auto py-4 md:py-6 px-4">
           <div className="flex items-center justify-between md:mb-8">
-            {/* Menu Bar */}
-            <div className="md:hidden">
-              <MobileMenu />
+            <div>
+              <div className="md:hidden">
+                <MobileMenu />
+              </div>
             </div>
 
-            {/* Logo */}
             <Logo />
 
-            {/* Icons */}
             <div className="flex items-center space-x-4">
               <WishlistIcon />
             </div>
           </div>
-
           <div className="hidden md:flex justify-center">
             <NavLinks />
           </div>
