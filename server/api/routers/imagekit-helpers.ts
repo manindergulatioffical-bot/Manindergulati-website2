@@ -1,20 +1,19 @@
-import Imagekit from "imagekit";
-import { env } from "@/lib/env";
+// server/api/routers/imagekit-helpers.ts
+import { getUploadAuthParams } from "@imagekit/next/server";
+import { getEnv } from "@/lib/env";
 
-const imageKit = new Imagekit({
-  publicKey: env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
-  privateKey: env.IMAGEKIT_PRIVATE_KEY,
-  urlEndpoint: env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT,
-});
+export function generateImageKitAuthParams() {
+  const env = getEnv(); // ✅ runtime-safe
 
-export async function deleteImages(images: string[]) {
-  imageKit.bulkDeleteFiles(images, function (error) {
-    if (error) console.log(error);
+  const { token, expire, signature } = getUploadAuthParams({
+    publicKey: env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
+    privateKey: env.IMAGEKIT_PRIVATE_KEY,
   });
-};
 
-export async function deleteImage(image: string) {
-  imageKit.deleteFile(image, function (error) {
-    if (error) console.log(error);
-  });
-};  
+  return {
+    token,
+    expire,
+    signature,
+    publicKey: env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
+  };
+}

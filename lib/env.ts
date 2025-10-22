@@ -7,6 +7,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY: z.string(),
   NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT: z.string(),
   IMAGEKIT_PRIVATE_KEY: z.string(),
+    NODE_ENV: z.enum(['development', 'production', 'test']),
 });
 
 export function getEnv() {
