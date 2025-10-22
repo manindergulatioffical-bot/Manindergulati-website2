@@ -1,17 +1,19 @@
-import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ImageKitProvider } from "@imagekit/next";
-import { env } from "@/lib/env";
+import { getEnv } from "@/lib/env";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const env = getEnv(); // ✅ runtime-safe
+
   return (
-    <ImageKitProvider urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}>
-      <Header />
-      <main>
-        {children}
-      </main>
-      <Footer />
-    </ImageKitProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ImageKitProvider publicKey={env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}>
+          {children}
+        </ImageKitProvider>
+        <Footer />
+      </body>
+    </html>
   );
 };
 

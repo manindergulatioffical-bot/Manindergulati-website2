@@ -1,38 +1,53 @@
-import { NextResponse } from "next/server";
-import { getUploadAuthParams } from "@imagekit/next/server";
-import { z } from "zod";
+import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/server/db";
+import { adminUsers } from "@/server/db/schema";
+import { eq } from "drizzle-orm";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { getEnv } from "@/lib/env";
 
-// Define schema
-const envSchema = z.object({
-  NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY: z.string(),
-  IMAGEKIT_PRIVATE_KEY: z.string(),
-});
-
-// Function to safely get env at runtime
-function getEnv() {
-  return envSchema.parse(process.env);
-}
-
-export async function GET() {
+export async function POST(request: NextRequest) {
   try {
-    const env = getEnv(); // ✅ parse environment at runtime
+    const env = getEnv(); // ✅ parse env at runtime
 
-    const { token, expire, signature } = getUploadAuthParams({
-      publicKey: env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
-      privateKey: env.IMAGEKIT_PRIVATE_KEY,
-    });
+    const { username, password } = await request.json();
+    if (!username || !password) {
+      return NextResponse.json({ error: "Username and password are required" }, { status: 400 });
+    }
 
-    return NextResponse.json({
-      token,
-      expire,
-      signature,
-      publicKey: env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
-    });
-  } catch (error) {
-    console.error("Error generating auth params:", error);
-    return NextResponse.json(
-      { error: "Failed to generate authentication parameters" },
-      { status: 500 }
+    const users = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
+    const user = users[0];
+    if (!user) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    if (!user.isActive) return NextResponse.json({ error: "Account is deactivated" }, { status: 401 });
+
+    const isValidPassword = await bcrypt.compare(password, user.passwordHash);
+    if (!isValidPassword) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+
+    await db.update(adminUsers).set({ lastLoginAt: new Date() }).where(eq(adminUsers.id, user.id));
+
+    const token = jwt.sign(
+      { id: user.id, username: user.username, role: user.role },
+      env.JWT_SECRET,
+      { expiresIn: "24h" }
     );
+
+    const response = NextResponse.json({
+      success: true,
+      message: "Login successful",
+      user: { id: user.id, username: user.username, role: user.role },
+    });
+
+    response.cookies.set("auth-token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60,
+      path: "/",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Login error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
