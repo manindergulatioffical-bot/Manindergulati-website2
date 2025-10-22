@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { Footer } from "@/components/footer";
+import { Header } from "@/components/header"; // ✅ import header
 import { ImageKitProvider } from "@imagekit/next";
 import { getEnv } from "@/lib/env";
 
@@ -25,6 +26,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body>
         <ImageKitProvider urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}>
+          <Header /> {/* ✅ Add header here */}
           {children}
         </ImageKitProvider>
         <Footer />
