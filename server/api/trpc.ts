@@ -15,7 +15,8 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { adminUsers } from "../db/schema";
 import { eq } from "drizzle-orm";
-import { env } from "@/lib/env";
+import { getEnv } from "@/lib/env";
+import { env } from "process";
 
 /**
  * 1. CONTEXT
@@ -41,7 +42,8 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
   
   if (token) {
     try {
-      const decoded = jwt.verify(token, env.JWT_SECRET) as { id: string; username: string; role: string };
+      if (!env.JWT_SECRET) throw new Error('JWT_SECRET is not defined');
+      const decoded = jwt.verify(token, env.JWT_SECRET) as unknown as { id: string; username: string; role: string };
       
       if (decoded && decoded.id) {
         const users = await db.select().from(adminUsers).where(eq(adminUsers.id, decoded.id));

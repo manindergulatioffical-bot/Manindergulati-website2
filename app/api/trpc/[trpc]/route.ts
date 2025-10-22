@@ -1,33 +1,27 @@
-// server/api/trpc.ts
-import { initTRPC } from "@trpc/server";
-import superjson from "superjson";
-import { getEnv } from "@/lib/env"; // ✅ use getEnv instead of env
+// app/api/trpc/[trpc]/route.ts
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import type { NextRequest } from "next/server";
+import { createTRPCRouter, createTRPCContext } from "@/server/api/trpc";
+import { appRouter } from "@/server/api/root";
 
-const t = initTRPC.context<{
-  // your context here
-}>().create({
-  transformer: superjson,
-  errorFormatter({ shape }) {
-    return shape;
-  },
-});
+/**
+ * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API.
+ */
+const handler = async (req: NextRequest) => {
+  const ctx = await createTRPCContext({ headers: req.headers }); // ✅ runtime-safe env access
 
-// Example: if you need env in some middleware or context
-export const createTRPCContext = () => {
-  const env = getEnv(); // ✅ runtime-safe access to environment variables
-
-  return {
-    env,
-    // other context properties
-  };
+  return fetchRequestHandler({
+    endpoint: "/api/trpc",
+    req,
+    router: appRouter,
+    createContext: () => ctx,
+    onError:
+      process.env.NODE_ENV === "development"
+        ? ({ path, error }) => {
+            console.error(`❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`);
+          }
+        : undefined,
+  });
 };
 
-export const createTRPCRouter = t.router;
-export const publicProcedure = t.procedure;
-// Example placeholder middleware; replace with your actual auth middleware
-const authMiddleware = t.middleware(async ({ ctx, next }) => {
-  // Add authentication logic here
-  return next();
-});
-
-export const protectedProcedure = t.procedure.use(authMiddleware);
+export { handler as GET, handler as POST };
