@@ -1,14 +1,22 @@
+// app/layout.tsx
 import Script from "next/script";
 import { Footer } from "@/components/footer";
-import { Header } from "@/components/header"; // ✅ import header
+import { Header } from "@/components/header";
 import { ImageKitProvider } from "@imagekit/next";
 import { getEnv } from "@/lib/env";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
+});
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const env = getEnv();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <head>
         {/* Google Analytics */}
         <Script
@@ -24,9 +32,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           `}
         </Script>
       </head>
-      <body>
+      <body className="font-sans">
         <ImageKitProvider urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}>
-          <Header /> {/* ✅ Add header here */}
+          <Header />
           {children}
         </ImageKitProvider>
         <Footer />
