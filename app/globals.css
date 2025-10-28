@@ -58,8 +58,6 @@
 }
 
 :root {
-  --font-heading: "Cormorant Garamond", serif;
-  --font-body: "DM Sans", sans-serif;
   --radius: 0rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -134,10 +132,6 @@
   }
   body {
     @apply bg-background text-foreground;
-     font-family: var(--font-body);
-  color: #111; /* Optional: luxury feel with deep grey-black */
-  background-color: #fff;
-  -webkit-font-smoothing: antialiased;
   }
 }
 
