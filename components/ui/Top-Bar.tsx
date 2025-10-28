@@ -5,12 +5,12 @@ export const TopBar = () => {
         For best prices and early deliveries,
       </span>
       <a
-        href="https://wa.me/918488070070"
+        href="https://wa.me/917065070555"
         target="_blank"
         rel="noopener noreferrer"
         className="text-[#D4AF37] hover:text-[#f5d78e] underline-offset-2 hover:underline font-semibold transition-colors duration-300"
       >
-        WhatsApp us at: +91 8488070070
+        WhatsApp us at: +91 7065070555
       </a>
     </div>
   );
