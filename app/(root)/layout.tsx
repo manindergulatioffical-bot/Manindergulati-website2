@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { ImageKitProvider } from "@imagekit/next";
 import { getEnv } from "@/lib/env";
 import { Poppins } from "next/font/google"; // ✅ import font
+import { TopBar } from "@/components/ui/Top-Bar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       <body>
         <ImageKitProvider urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}>
+            <TopBar /> 
           <Header />
           {children}
         </ImageKitProvider>
