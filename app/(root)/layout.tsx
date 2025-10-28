@@ -1,13 +1,23 @@
+import "./globals.css";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ImageKitProvider } from "@imagekit/next";
 import { getEnv } from "@/lib/env";
-import { Poppins } from "next/font/google"; // ✅ import font
 
-const poppins = Poppins({
+// ✅ Import fonts
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -15,7 +25,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const env = getEnv();
 
   return (
-    <html lang="en" className={poppins.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${dmSans.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* ✅ Google Analytics */}
         <Script
