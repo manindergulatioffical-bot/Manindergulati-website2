@@ -27,7 +27,7 @@ export function HeroSection() {
       </div>
       <div className="absolute inset-0 bg-black/30" />
       <div className="text-center relative z-10 px-4 md:px-8">
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-white">
+        <h1 className="text-4xl md:text-6xl  mb-8 text-white">
           Maninder Gulati
         </h1>
         <Button size="lg" variant={"outline"} className="px-8 py-3" asChild>
