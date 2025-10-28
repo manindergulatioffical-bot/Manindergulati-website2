@@ -6,18 +6,10 @@ import { FaWhatsapp } from "react-icons/fa";
 export const Popup = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  // ✅ Always show popup 2s after each page load
   useEffect(() => {
-    // ✅ Check if popup has already been shown during this session
-    const hasShown = sessionStorage.getItem("popupShown");
-
-    if (!hasShown) {
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-        sessionStorage.setItem("popupShown", "true"); // 👈 mark as shown
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => setIsVisible(true), 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleClose = () => setIsVisible(false);
@@ -26,7 +18,7 @@ export const Popup = () => {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
-      <div className="relative w-full max-w-sm sm:max-w-md bg-white rounded-2xl sm:rounded-3xl shadow-2xl text-center p-6 sm:p-8 animate-fade-in">
+      <div className="relative w-full max-w-sm sm:max-w-md bg-white shadow-2xl text-center p-6 sm:p-8 animate-fade-in">
         {/* ❌ Close Button */}
         <button
           onClick={handleClose}
@@ -50,7 +42,7 @@ export const Popup = () => {
           href="https://wa.me/917065070555"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 mb-3 inline-flex items-center justify-center gap-2 bg-black text-white px-5 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl text-sm sm:text-base font-dmsans font-medium hover:bg-gray-800 transition-all shadow-md"
+          className="mt-6 mb-3 inline-flex items-center justify-center gap-2 bg-black text-white px-5 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-dmsans font-medium hover:bg-gray-800 transition-all shadow-md"
         >
           <FaWhatsapp className="text-xl sm:text-2xl text-green-400" />
           CHAT FOR BEST PRICE
