@@ -3,12 +3,19 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ImageKitProvider } from "@imagekit/next";
 import { getEnv } from "@/lib/env";
+import { Poppins } from "next/font/google"; // ✅ import font
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const env = getEnv();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={poppins.className} suppressHydrationWarning>
       <head>
         {/* ✅ Google Analytics */}
         <Script
