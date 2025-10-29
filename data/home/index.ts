@@ -1,5 +1,5 @@
 export const bannerImage =
-  "https://ik.imagekit.io/7uouyh55b/maninder_gulati/home/hero_banner.JPEG?updatedAt=1755075624519";
+  "https://ik.imagekit.io/ftwqtijhy/Indian%20Ethnic%20Banner%20with%20Original%20Models%20(2).png?updatedAt=1761740476172";
 
 export const ReelsData = [
   "https://ik.imagekit.io/7uouyh55b/maninder_gulati/videos/reel-1.mp4?ngsw-bypass=true",
