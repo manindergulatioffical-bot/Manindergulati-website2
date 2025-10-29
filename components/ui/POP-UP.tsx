@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const Popup = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show on every page reload after 2 seconds
+  // ✅ Always show popup 2s after each page load
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 2000);
     return () => clearTimeout(timer);
@@ -16,58 +17,40 @@ export const Popup = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
-      <div className="relative w-full max-w-sm sm:max-w-md bg-white shadow-2xl p-6 sm:p-8 text-center border border-gray-200">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
+      <div className="relative w-full max-w-sm sm:max-w-md bg-white shadow-2xl text-center p-6 sm:p-8 animate-fade-in">
         {/* ❌ Close Button */}
         <button
           onClick={handleClose}
-          aria-label="Close popup"
           className="absolute top-3 right-4 text-gray-400 hover:text-black text-2xl transition"
+          aria-label="Close popup"
         >
           ✕
         </button>
 
-        {/* 🛍️ Heading */}
-        <h2 className="text-sm sm:text-base text-gray-700 mb-1">
-          Want to join our exclusive inner circle?
+        {/* ✨ Heading */}
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 font-cormorant tracking-wide leading-snug">
+          Let us help you find your perfect look
+          <br />
+          <span className="block mt-1 text-sm sm:text-base text-gray-700 font-dmsans">
+            Looking for something unique?
+          </span>
         </h2>
-        <h1 className="text-lg sm:text-xl font-semibold text-gray-900 tracking-wide mb-2">
-          REGISTER TO GET 10% OFF
-        </h1>
-        <p className="text-xs sm:text-sm text-gray-600 mb-5">
-          & more premium deals on your first order!
-        </p>
 
-        {/* 📩 Input Fields */}
-        <form className="space-y-3">
-          <input
-            type="email"
-            placeholder="Enter Email"
-            className="w-full border border-gray-300 text-sm sm:text-base px-3 py-2 sm:py-2.5 rounded focus:outline-none focus:border-black"
-            required
-          />
-          <input
-            type="tel"
-            placeholder="Enter Phone"
-            className="w-full border border-gray-300 text-sm sm:text-base px-3 py-2 sm:py-2.5 rounded focus:outline-none focus:border-black"
-            required
-          />
+        {/* 💬 WhatsApp Button */}
+        <a
+          href="https://wa.me/917065070555"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 mb-3 inline-flex items-center justify-center gap-2 bg-black text-white px-5 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-dmsans font-medium hover:bg-gray-800 transition-all shadow-md"
+        >
+          <FaWhatsapp className="text-xl sm:text-2xl text-green-400" />
+          CHAT FOR BEST PRICE
+        </a>
 
-          {/* 🖤 Button */}
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-2 sm:py-2.5 text-sm sm:text-base font-medium hover:bg-gray-800 transition-all"
-          >
-            GET COUPON CODE
-          </button>
-        </form>
-
-        {/* ⚙️ Notes */}
-        <p className="text-[10px] sm:text-xs text-gray-500 mt-3">
-          *Only applicable on your first purchase
-        </p>
-        <p className="text-[10px] sm:text-xs text-gray-500 mt-1">
-          *T&amp;C apply
+        {/* 📝 Note */}
+        <p className="text-gray-600 text-xs sm:text-sm font-dmsans leading-relaxed">
+          Connect with our team for assistance, early deliveries, or customisations.
         </p>
       </div>
     </div>
