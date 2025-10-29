@@ -5,7 +5,7 @@ import { bannerImage } from "@/data/home";
 
 export function HeroSection() {
   return (
-    <section className="relative w-full h-[100vh] sm:h-[100vh] md:h-[100vh] overflow-hidden flex items-center justify-center">
+    <section className="relative w-full  sm:h-[100vh] md:h-[100vh] overflow-hidden flex items-center justify-center">
       {/* Banner Image - Always fills, no white space */}
       <div className="absolute inset-0">
         <Image
