@@ -1,4 +1,5 @@
 import { CategoryPage } from "@/components/categories/category-page";
+import { WomenBanner } from "@/components/ui/Womenbanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -24,5 +25,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CateegoryPage() {
-  return <CategoryPage gender="women" />;
+  return <div>
+      <WomenBanner />
+<CategoryPage gender="women" />;
+  </div> 
 }
