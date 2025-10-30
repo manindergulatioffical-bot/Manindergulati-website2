@@ -1,5 +1,6 @@
 import { CategoryPage } from "@/components/categories/category-page";
-import { WomenBanner } from "@/components/ui/Womenbanner";
+import { WomenBanner } from "@/components/ui/WomenBanner";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
