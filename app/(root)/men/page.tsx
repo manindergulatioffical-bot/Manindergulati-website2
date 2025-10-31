@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default async function CateegoryPage() {
   return <div>
-      <h1 className="text-3xl sm:text-5xl font-cormorant font-semibold text-gray-900 tracking-wide mb-6">
+      <h1 className="text-center text-3xl md:text-5xl font-cormorant font-semibold mt-8 mb-4">
         Men’s Fashion Collection by Maninder Gulati
       </h1>
     <CategoryPage gender="men" />;
