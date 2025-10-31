@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default async function CateegoryPage() {
   return <div>
       <WomenBanner />
-      <h1 className="text-center text-3xl md:text-5xl font-cormorant font-semibold mt-8 mb-4">
+      <h1 className="text-center text-3xl md:text-5xl font-cormorant  mt-8 mb-4">
         Women's Fashion Collection
       </h1>
 <CategoryPage gender="women" />;
