@@ -1,4 +1,5 @@
 import { CategoryPage } from "@/components/categories/category-page";
+import { WomenBanner } from "@/components/ui/WomenBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 
 export default async function CateegoryPage() {
   return <div>
+    <WomenBanner />
       <h1 className="text-center text-3xl md:text-5xl font-cormorant font-semibold mt-8 mb-4">
         Men’s Fashion Collection by Maninder Gulati
       </h1>
