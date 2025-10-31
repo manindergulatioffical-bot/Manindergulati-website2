@@ -24,5 +24,10 @@ export const metadata: Metadata = {
 };
 
 export default async function CateegoryPage() {
-  return <CategoryPage gender="men" />;
+  return <div>
+      <h1 className="text-3xl sm:text-5xl font-cormorant font-semibold text-gray-900 tracking-wide mb-6">
+        Men’s Fashion Collection by Maninder Gulati
+      </h1>
+    <CategoryPage gender="men" />;
+  </div> 
 }
