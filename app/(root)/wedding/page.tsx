@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Wedding Collections",
-  description: "Discover exquisite wedding collections by Maninder Gulati. Shop bridal wear, groom's attire, wedding party outfits, and special occasion dresses. Handcrafted with elegance for your special day.",
+  description: "Discover exquisite wedding collections by Maninder Gulati — shop handcrafted bridal wear, groom’s attire & occasion outfits designed with timeless elegance.",
   keywords: ["wedding collections", "bridal wear", "groom's attire", "wedding party outfits", "special occasion dresses", "wedding fashion", "bridal fashion", "Maninder Gulati wedding"],
   openGraph: {
     title: "Wedding Collections - Maninder Gulati",

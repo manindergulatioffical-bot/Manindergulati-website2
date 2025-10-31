@@ -8,12 +8,13 @@ import WhatsAppButton from "./_components/whatsapp-button";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Welcome to Maninder Gulati - Premium Fashion & Lifestyle. Discover our latest collections, trending styles, and handcrafted fashion pieces. Shop men's and women's clothing, wedding collections, and lifestyle products.",
+  description: "Discover premium fashion & lifestyle with Maninder Gulati. Explore handcrafted collections, men's & women's clothing, and wedding styles online.",
   keywords: ["home", "fashion", "premium clothing", "latest collections", "trending styles", "handcrafted fashion", "Maninder Gulati"],
   openGraph: {
     title: "Maninder Gulati - Premium Fashion & Lifestyle",
     description: "Welcome to Maninder Gulati - Premium Fashion & Lifestyle. Discover our latest collections, trending styles, and handcrafted fashion pieces.",
     url: "https://manindergulati.com",
+      type: "website",
     images: [
       {
         url: "/home-og-image.jpg",

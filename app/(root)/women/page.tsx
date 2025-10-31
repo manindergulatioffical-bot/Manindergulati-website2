@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Women's Fashion",
-  description: "Discover premium women's fashion collections by Maninder Gulati. Shop the latest trends in women's clothing, dresses, formal wear, casual styles, and accessories. Handcrafted with elegance and style.",
+  description: "Discover premium women’s fashion by Maninder Gulati — shop handcrafted dresses, formal wear, casual styles & accessories designed with elegance and style.",
   keywords: ["women's fashion", "women's clothing", "dresses", "formal wear", "casual styles", "women's accessories", "premium women's fashion", "handcrafted women's clothing", "Maninder Gulati women"],
   openGraph: {
     title: "Women's Fashion - Maninder Gulati",
