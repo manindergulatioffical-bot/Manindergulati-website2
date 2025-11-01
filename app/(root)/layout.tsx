@@ -19,6 +19,40 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className={poppins.className} suppressHydrationWarning>
       <head>
+         <Script
+          id="schema-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ClothingStore",
+              name: "Maninder Gulati",
+              url: "https://manindergulati.com",
+              logo: "https://ik.imagekit.io/7uouyh55b/maninder_gulati/logo.png",
+              description:
+                "Discover handcrafted luxury fashion by Maninder Gulati — men’s and women’s clothing, wedding couture, and bespoke designs.",
+              sameAs: [
+                "https://www.instagram.com/manindergulatiofficial",
+                "https://www.facebook.com/manindergulatiofficial",
+              ],
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Your Store Address Here",
+                addressLocality: "New Delhi",
+                addressRegion: "Delhi",
+                postalCode: "110001",
+                addressCountry: "IN",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+91-7065070555",
+                contactType: "customer service",
+                areaServed: "IN",
+                availableLanguage: ["English", "Hindi"],
+              },
+            }),
+          }}
+        />
         {/* ✅ Google Analytics */}
         <Script
           strategy="afterInteractive"
